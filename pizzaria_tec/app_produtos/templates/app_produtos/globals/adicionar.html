@@ -1,0 +1,24 @@
+{% extends "app_produtos/index.html" %}
+
+{% block title %}Adicionar Produto{% endblock title %}
+
+{% block content %}
+
+<h1>Adicionar Produto</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="text" name="nome_produto" id="">
+    <input type="text" name="preco" id="">
+    <input type="text" name="img" id="">
+
+    <button type="submit">Adicionar</button>
+</form>
+
+{% if produto %}
+    <ul>
+        <li>Nome: {{ produto.nome_produto }}</li>
+    </ul>
+{% endif %}
+
+{% endblock content %}
