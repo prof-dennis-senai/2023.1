@@ -1,25 +1,43 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from myapp.models import Usuario
 
-data = [
-    {"nome": "Joaquim"},
-]
+
 # Create your views here.
-def home(request):
-    nome = request.POST.get('nome')
+def listar_usuarios(request):
+    values = Usuario.objects.all()
+    nome = request.GET.get('nome')
     if nome:
-        data.append({"nome": nome}) 
-    return render(request, 'myapp/globals/home.html',{"dados":data,"ultimo_nome":nome},status=500)
+        values = values.filter(nome__icontains=nome)
+   
+    return render(request, 'myapp/globals/listar.html',{"lista_usuarios":values})
 
-def sobre(request):
-    return render(request, 'myapp/globals/sobre.html')
+def criar_usuarios(request):
+    nome = None
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        idade = request.POST.get('idade')
+        if nome and idade:
+            Usuario.objects.create(nome=nome, idade=idade)
+            
+    return render(request, 'myapp/globals/cadastrar.html', {"ultimo_nome":nome})
 
-def contato(request):
-    return render(request, 'myapp/globals/contato.html')
+def deletar_usuarios(request, id):
+    usuario = Usuario.objects.get(id=id)
+    usuario.delete()
+    return redirect(listar_usuarios)
 
 
-def usuarios(request,id=None):
-    try:
-        nome = data[id-1]
-    except:
-        nome = None
-    return render(request, 'myapp/globals/usuarios.html',nome)
+def atualizar_usuarios(request, id):
+    usuario = Usuario.objects.get(id=id)
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        idade = request.POST.get('idade')
+        if nome and idade:
+            usuario.nome = nome
+            usuario.idade = idade
+            usuario.save()
+            return redirect(listar_usuarios)
+        else:
+            return render(request, 'myapp/globals/atualizar.html', {"item":usuario, "erro":True})
+            
+    return render(request, 'myapp/globals/atualizar.html', {"item":usuario})
