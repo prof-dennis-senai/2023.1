@@ -20,6 +20,7 @@ Pizzaria tec
                     <div class="card-body">
                       <h4 class="card-title">{{ itens.nome_produto }}</h4>
                       <p class="card-text">{{ itens.preco }}</p>
+                      <button type="button" class="btn btn-primary" onclick="onClickAddCart({{ itens.id }}, '{{ itens.nome_produto }}')">Adicionar no Carrinho</button>
                     </div>
                 </div>
             </div>

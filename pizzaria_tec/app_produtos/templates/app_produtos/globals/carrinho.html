@@ -1,0 +1,20 @@
+{% extends "app_produtos/index.html" %}
+
+{% block title %}Carrinho{% endblock title %}
+
+{% block content %}
+<h1>Carrinho</h1>
+{% if carrinho %}
+<h3> os itens do carrinho são: </h3>
+<ul>
+    {% for itens in carrinho %}
+        <li>Nome: {{ itens }}</li>
+    {% endfor %}
+    <form action="{% url 'finalizar_compra' %}" method="get">
+        <button type="submit">Finalizar Compra</button>
+    </form>
+</ul>
+{% else %}
+<p>Seu carrinho esta vazio</p>
+{% endif %}
+{% endblock content %}

@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Produto
+from django.shortcuts import render, redirect
+from .models import Produto, Compra, CompraProduto
 
 # Create your views here.
 def index(request):
@@ -22,3 +22,15 @@ def adicionar(request):
             Produto.objects.create(**produto)
 
     return render(request, 'app_produtos/globals/adicionar.html', {"produto":produto})
+
+def carrinho(request):
+    carrinho = request.session.get('carrinho', [])
+    return render(request, 'app_produtos/globals/carrinho.html', {"carrinho":carrinho})
+
+def finalizar_compra(request):
+    carrinho = request.session.get('carrinho', [])
+    compra = Compra.objects.create()
+    for id in carrinho:
+        CompraProduto.objects.create(compra_id=compra, produto_id=Produto.objects.get(id=id))
+    request.session['carrinho'] = []
+    return redirect('carrinho')
