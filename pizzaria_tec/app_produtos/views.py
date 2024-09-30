@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from .models import Produto, Compra, CompraProduto
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 def index(request):
     produtos = Produto.objects.all()
     return render(request, 'app_produtos/globals/home.html', {"produtos":produtos})
 
+@login_required(login_url='/login/login')
+@permission_required('app_produtos.add_produto', raise_exception=False, login_url="/error/404/")
 def adicionar(request):
     produto = {}
     if request.method == 'POST':

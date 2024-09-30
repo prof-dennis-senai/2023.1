@@ -6,6 +6,11 @@ class Produto(models.Model):
     preco = models.FloatField()
     img = models.CharField(max_length=100)
 
+    class Meta:
+        permissions = (
+            ("add_produtos", "Pode adicionar produtos"),
+        )
+
     def __str__(self):
 
         return "Produto: {}, Preço: {}, Imagem: {}".format(self.nome_produto, self.preco, self.img)
