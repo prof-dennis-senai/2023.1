@@ -41,10 +41,8 @@ def finalizar_compra(request):
 
 
 def vizualizar(request):
-    vendas = CompraProduto.objects.select_related('produto_id', 'compra_id').values(
-        'compra_id',
-        'quantidade', 
-        nome_produto=F('produto_id__nome_produto'), 
-        preco=F('produto_id__preco'),
-    )
+    vendas = CompraProduto.objects.select_related('compra_id', 'produto_id').all()
+    for i in vendas:
+        print(i.produto_id.preco)
+    import ipdb; ipdb.set_trace()
     return render(request, 'app_produtos/globals/vizualizar.html', {"vendas":vendas})
