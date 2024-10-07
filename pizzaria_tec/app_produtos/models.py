@@ -20,10 +20,10 @@ class Compra(models.Model):
     data_venda = models.DateField(auto_now=True)
 
     def __str__(self):
-
-        return "Compra: {}, Preço: {}, Imagem: {}".format(self.data_venda)
+        return "Compra realizada em: {}".format(self.data_venda)
 
 
 class CompraProduto(models.Model):
     produto_id = models.ForeignKey(Produto, on_delete=models.CASCADE)
     compra_id = models.ForeignKey(Compra, on_delete=models.CASCADE)
+    quantidade = models.IntegerField(default=1)
