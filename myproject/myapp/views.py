@@ -9,7 +9,7 @@ def listar_usuarios(request):
     if nome:
         values = values.filter(nome__icontains=nome)
    
-    return render(request, 'myapp/globals/listar.html',{"lista_usuarios":values})
+    return render(request, 'myapp/pages/listar.html',{"lista_usuarios":values})
 
 def criar_usuarios(request):
     nome = None
@@ -19,7 +19,7 @@ def criar_usuarios(request):
         if nome and idade:
             Usuario.objects.create(nome=nome, idade=idade)
             
-    return render(request, 'myapp/globals/cadastrar.html', {"ultimo_nome":nome})
+    return render(request, 'myapp/pages/cadastrar.html', {"ultimo_nome":nome})
 
 def deletar_usuarios(request, id):
     usuario = Usuario.objects.get(id=id)
@@ -38,6 +38,6 @@ def atualizar_usuarios(request, id):
             usuario.save()
             return redirect(listar_usuarios)
         else:
-            return render(request, 'myapp/globals/atualizar.html', {"item":usuario, "erro":True})
+            return render(request, 'myapp/pages/atualizar.html', {"item":usuario, "erro":True})
             
-    return render(request, 'myapp/globals/atualizar.html', {"item":usuario})
+    return render(request, 'myapp/pages/atualizar.html', {"item":usuario})
