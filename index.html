@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+
+        <header>
+            <nav class="navbar">
+                <ul class="nav-item">
+                    <div> 
+                        <li><a href="#">item 1</a></li>
+                        <li><a href="#">item 2</a></li>
+                        <li><a href="#">item 3</a></li>
+                    </div>
+                    <li><a href="#">item 4</a></li>
+                </ul>
+            </nav>
+        </header>
+        <aside class="aside-left">
+            <div>
+                <div class="accordion">
+                    <input type="checkbox" id="funcionarios" onchange="accordionSidebar(this)">
+                    <label for="funcionarios">Funcionários</label>
+                </div>
+                <ul id="funcionarios-content">
+                    <li><a href="#">item 1</a></li>
+                    <li><a href="#">item 2</a></li>
+                    <li><a href="#">item 3</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="accordion">
+                    <input type="checkbox" id="produtos" onchange="accordionSidebar(this)">
+                    <label for="produtos">Produtos</label>
+                </div>
+                <ul id="produtos-content">
+                    <li><a href="#">item 1</a></li>
+                    <li><a href="#">item 2</a></li>
+                    <li><a href="#">item 3</a></li>
+                </ul>
+            </div>
+        </aside>
+        <aside class="banner-right">
+            <h1>Banner</h1>
+        </aside>
+
+        <main>
+            <h1>Olá Mundo</h1>
+        </main>
+    
+        <footer>
+            <p>footer</p>
+            <a href="#">Subir ao topo</a>
+            
+        </footer>
+    
+    </div>
+</body>
+</html>
